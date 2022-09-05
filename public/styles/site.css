@@ -1,0 +1,40 @@
+/*
+Title:  site.css
+Author:  John Vanhessche
+Date: 9/4/2022
+Description:  site.css the main css file for the pets-r-us app
+*/
+
+/* just the minimum styling for now.  Will add much more later on.  Still thinking about the layout.*/
+
+body {
+    background-color: aqua;
+    font-size: 15px;
+};
+
+.header-area {
+    background-color: aqua;
+    text-align: center;
+}
+
+h1 {
+    text-align: center;
+}
+
+ul, li {
+    display: inline;
+    padding: 20px;
+}
+
+.nav-image {
+    max-width: 75px;
+    max-height: 75px;
+}
+
+.footer-area {
+    text-align: center;
+}
+
+.navigation-items {
+    display: inline;
+}
