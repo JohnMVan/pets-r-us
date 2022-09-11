@@ -16,9 +16,9 @@ const path = require('path');
 
 //per handout for week 4.  
 app.engine('.html', require('ejs').__express);
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'html');
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, '/public')));
 
 app.use(express.static("views"));
 
@@ -34,6 +34,20 @@ app.get('/', (req, res) => {
     res.render("grooming", {
         title: 'grooming',
         message: 'grooming page route'
+    })
+});
+
+app.get('/', (req, res) => {
+    res.render("training", {
+        title: 'training',
+        message: 'training page route'
+    })
+});
+
+app.get('/', (req, res) => {
+    res.render("boarding", {
+        title: 'boarding',
+        message: 'boarding page route'
     })
 });
 

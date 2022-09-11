@@ -10,6 +10,7 @@ Description:  site.css the main css file for the pets-r-us app
 body {
     background-color: aqua;
     font-size: 15px;
+    background-image:url("../images/adoption-985505_960_720.jpg")
 };
 
 .header-area {
