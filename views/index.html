@@ -5,44 +5,17 @@ Date 9/4/2022
 Description:  index.html page for the pets-r-us app.
 -->
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" type="text/css" href="../public/styles/site.css">    
-    <title>Pets-R-Us</title>
-</head>
-<body>
-     <!--including the _header.html partial view here-->
-    <header>
-        <%- include("./partials/_header.html") %>
-    </header> 
+<!--header area, contains HTML-->
+<%- include('partials/_header.html') %>
+
+<div>
+    <h1>Some stuff between</h1>
+</div>
+
+
+<!--footer area, includes end of html-->
+<%- include('partials/_footer.html') %>
     
-    <!--Just a quick div for the header and nav bar.  None of this is very fancy at the moment.  Concentration on function first.-->
-    <div class="header-area">
-        <h1 class="header-text">Welcome to Pet's-R-US</h1>
-    </div>
-    <div class="navigation-area">
-        <div class="navigation-bar">
-            <ul>
-                <div class="navigation-items">
-                    <li><a href="./index.html"><div class="nav-text"><img class="nav-image" src="../public/images/home.png" alt="Home"/><h4>Home</h4></div></a></li>
-                    <li><a href="./grooming.html"><div class="nav-text"><img class="nav-image" src="../public/images/dog being groomed.jpg" alt="picture of dog being groomed"/><h4>Grooming</h4></div></a></li>               
-                    <li><a href="./training.html"><div class="nav-text"><img class="nav-image" src="../public/images/pet-training.jpg" alt="picture of dog running"/><h4>Training</h4></div></a></li>   
-                    <li><a href="./boarding.html"><div class="nav-text"><img class="nav-image" src="../public/images/dog in house.png" alt="picture of in house"/><h4>Boarding</h4></div></a></li>
-                    <li></li>
-                    <li></li>
-                </div>
-            </ul>
-        </div>
-    </div>                  
-    <div class="footer-area">
-        <!--including footer partial view here-->
-        <footer>
-            <%- include('./partials/_footer.html') %>
-        </footer>
-    </div> 
-</body>
-</html>
+   
+                      
+    
