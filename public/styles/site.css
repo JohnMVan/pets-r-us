@@ -38,4 +38,11 @@ ul, li {
 
 .navigation-items {
     display: inline;
+    float: left;
+}
+
+.navigation-area {
+    text-align: center;
+    display: inline;
+    float: left;
 }
