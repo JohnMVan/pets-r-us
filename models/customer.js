@@ -1,8 +1,11 @@
-
-
+/**
+ * Title:  customer.js
+ * Author:  John Vanhessche
+ * Date:  16 September 2022
+ * Desc:  Customer.js file for Pets-R-Us app
+ */
 
 const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
 
 const Customer = new mongoose.Schema(
     {
@@ -10,7 +13,5 @@ const Customer = new mongoose.Schema(
         email: { type: String, required: true, unique: true}
     }
 );
-
-Customer.plugin(passportLocalMongoose);
 
 module.exports = mongoose.model('Customer', Customer);

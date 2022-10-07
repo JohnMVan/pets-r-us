@@ -8,56 +8,31 @@
  */
 
 const express = require('express');
-const app = express();
-const PORT = process.env.PORT || 3000;
-const mongoose = require('mongoose');
-const passport = require('passport');
-const LocalStrategy = require('passport-local');
-const session = require('express-session');
-const Customer = require('./models.customer.js');
-
-// Needed to set path, because the path.join in app.set was throwing a reference error.
 const path = require('path');
+const mongoose = require('mongoose');
 
-const conn = `mongodb+srv://web340_admin:PW123abc!@bellevueuniversity.ouotidt.mongodb.net/?retryWrites=true&w=majority`;
+const Customer = require('./models/customer');
+const Appointment = require('./models/appointment');
 
-//per handout for week 4.  
+const app = express();
 app.engine('.html', require('ejs').__express);
-
 app.set('views', path.join(__dirname, '/views'));
 app.set('view engine', 'html');
 
 app.use(express.static(path.join(__dirname, '/public')));
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
 
-app.use(session({
-    secret: 's3cret',
-    resave: true,
-    saveUnitialized: true
-}));
+const PORT = process.env.PORT || 3000;
+const conn = `mongodb+srv://web340_admin:PW123abc!@bellevueuniversity.ouotidt.mongodb.net/web340DB?retryWrites=true&w=majority`;
 
-app.use(passport.initialize());
-app.use(passport.session());
+mongoose.connect(conn).then(() => {
+    console.log('Connection to the database was successful')
+}).catch(err => {
+    console.log('MongoDB Error: ' + err.message)
+});
 
-passport.use(new LocalStrategy(Customer.authenticate()));
-passport.serializeUser(Customer.serializeUser());
-passport.deserializeUser(Customer.deserializeUser());
 
-Customer.register(new Customer({customerId: customerID, email: email}),
-    password, function(err, user) {
-        if(err) {
-            console.log(err);
-            return res.redirect('/register')
-        }
-
-        passport.authenticate('local') (
-            req, res, function() {
-                res.redirect('/register')
-            });
-        }),
-
-//   app.use(express.static("views"));     I don't need this code.  By removing, the website started to generate correctly.
-
-//Creating routes for home and grooming pages
 app.get('/', (req, res) => {  
     res.render("index", {
         title: "Home page",
@@ -65,43 +40,72 @@ app.get('/', (req, res) => {
     })
 });
 
-app.get('/', (req, res) => {
+app.get('/grooming', (req, res) => {
     res.render("grooming", {
         title: 'grooming',
         message: 'grooming page route'
     })
 });
 
-app.get('/', (req, res) => {
+app.get('/training', (req, res) => {
     res.render("training", {
         title: 'training',
         message: 'training page route'
     })
 });
 
-app.get('/', (req, res) => {
+app.get('/boarding', (req, res) => {
     res.render("boarding", {
         title: 'boarding',
         message: 'boarding page route'
     })
 });
 
-http.get('partials/_registration', function(req, res) 
-{
-    res.render('_registration')
+app.get('/registration', (req, res) => {
+    res.render('registration', {
+        title: `Pets-R-Us: Registration`
+    })
+}); 
+
+app.post('/registration', (req, res, next) => {
+    const newCustomer = new Customer({
+        customerId: req.body.customerId,
+        email: req.body.email
+    })  
+    
+    Customer.create(newCustomer, function(err, cus) {
+        if (err) {
+            console.log(err);
+            next(err);
+        } else {
+            res.render('index', {
+                pageHeader: 'Welcome to Pets-R-Us',
+                title: 'Pets-R-Us: Home'
+            })
+        }
+    })
 });
 
-http.post('partials/_registration', function(req, res, next) {
-    let customerID = req.body.customerID;
-    let email = req.body.email;
+app.get('/customer-list', (req, res) => {
+    res.render('customer-list')
 });
 
-mongoose.connect(conn).then(() => {
-    console.log('Connection to the database was successful')
-}).catch(err => {
-    console.log('MongoDB Error: ' + err.message)
-})
+app.get('/appointment', (req, res) => {
+    res.render('appointment', {
+        title: `Pets-R-Us: Appointments`
+    })
+});
 
+app.get('api/appointment', async(req, res) => {}
+    Customer.find('customerId': req.params.customerId), 
+    function(err, orders) {
+        if(err) {
+            console.log(err);
+            next(err);
+        } else {
+            res.json(appointment);
+        }
+    })
 
 //starting server on port 3000
 app.listen(PORT, () => {

@@ -1,0 +1,49 @@
+<!--
+Title:  customer-list.html
+Author:  John Vanhessche
+Date 9/25/2022
+Description:  customer-list.html page for the pets-r-us app.
+-->
+
+
+<%- include('./partials/_header.html') %>
+
+<section class="container">
+    <div class="card center-div">
+        <div class="card-title">
+            Customer List
+        </div>
+
+        <div class="card-content">
+            <% if(customer.length > 0) { %>
+            <table class="table">
+                <tr>
+                    <th>Customer ID</th>
+                    <th>Customer Email</th>
+                </tr>
+                <tbody>
+                <% customers.forEach(function(customer) { %>
+                <tr>
+                    <td>
+                        <%= customer.name %>
+                    </td>
+                    <td>
+                        <%= customer.email %> 
+                    </td>
+                    <td>
+                        <a href="#">DELETE</a>
+                    </td>
+                </tr>
+                <% }) %>
+                </tbody>
+            </table>
+            <% } else { %>
+            <h3>Customer has not been added to the MongoDV database.  Try adding one!</h3>
+            <% } %>           
+        </div>
+    </div>
+</section>
+
+
+<%- include('.partials/_footer.html') %>
+

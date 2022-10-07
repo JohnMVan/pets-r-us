@@ -7,12 +7,22 @@
 
 
 <!--header area, contains HTML-->
-<%- include('partials/_header.html') %>
+<%- include('partials/_header.html') -%>
 
 
-<!--registration area-->
-<%- include('partials/_registration.html') %>
-
+<div class="registration-container">
+    <form action="/registration" method="post">
+        <div class="registration-area">
+            <label class="registration-customerId">Please Enter your customer ID</label>
+            <input type="text" class="registration-customerId-input" id="customerId">
+            <br>
+            <label class="registration-customerEmail" for="email">Please Enter your email</label>
+            <input type="email" class="registration-customerEmail-input" name="email" id="customerEmail">
+        </div>
+        <input type="submit" value="Submit"></input>
+    </form>
+    
+</div>
 
 <!--footer area, includes end of html-->
-<%- include('partials/_footer.html') %>
+<%- include('partials/_footer.html') -%>
