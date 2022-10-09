@@ -8,21 +8,25 @@
 
 <!--header area, contains HTML-->
 <%- include('partials/_header.html') -%>
-
-
-<div class="registration-container">
-    <form action="/registration" method="post">
-        <div class="registration-area">
-            <label class="registration-customerId">Please Enter your customer ID</label>
-            <input type="text" class="registration-customerId-input" id="customerId">
-            <br>
-            <label class="registration-customerEmail" for="email">Please Enter your email</label>
-            <input type="email" class="registration-customerEmail-input" name="email" id="customerEmail">
+<div class="card">
+    <div class="card-content">
+        <div class="form">
+            <form action="/registration" method="post">
+                <div class="form-field">
+                    <label for="customerId">Please Enter your customer ID</label>
+                    <br>
+                    <input type="text" class="input" name="customerId" id="customerId">
+                    <br>
+                    <label for="email">Please Enter your email</label>
+                    <br>
+                    <input type="text" class="input" name="email" id="email" required>
+                </div>
+                <div>
+                <input type="submit" value="Submit" class="btn btn-primary full-width"></input>
+                </div>
+            </form>    
         </div>
-        <input type="submit" value="Submit"></input>
-    </form>
-    
+    </div>
 </div>
-
 <!--footer area, includes end of html-->
 <%- include('partials/_footer.html') -%>

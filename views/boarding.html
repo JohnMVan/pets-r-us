@@ -21,26 +21,20 @@ Description:  boarding.html page for the pets-r-us app.
         <%- include("./partials/_header.html") %>
     </header> 
 
-    <div class="header-area">
-        <h1 class="header-text">Boarding</h1>
-    </div>
-    <div class="navigation-area">
-        <div class="navigation-bar">
-            <ul>
-                <!--More pages to follow.  just the two defined so far-->
-                <div class="navigation-items">
-                    <li><a href="./index.html"><div class="nav-text"><img class="nav-image" src="../public/images/home.png" alt="Home"/><h4>Home</h4></div></a></li> 
-                    <li><a href="./grooming.html"><div class="nav-text"><img class="nav-image" src="../public/images/dog being groomed.jpg" alt="picture of dog being groomed"/><h4>Grooming</h4></div></a></li>              
-                    <li><a href="./training.html"><div class="nav-text"><img class="nav-image" src="../public/images/pet-training.jpg" alt="picture of dog running"/><h4>Training</h4></div></a></li>   
-                    <li><a href="./boarding.html"><div class="nav-text"><img class="nav-image" src="../public/images/dog in house.png" alt="picture of dog in house"/><h4>Boarding</h4></div></a></li>
-                    <li></li>
-                    <li></li>
-                </div>
-            </ul>
+        <div class="card">
+            <div class="card-title"></div>
+            <div class="card-content">
+                <ul>
+                    <li>Overnight</li>
+                    <li>Per Day</li>
+                    <li>Per Hour</li>
+                    <li>Custom Time</li>
+                </ul>
+            </div>
+
         </div>
-    </div>                  
-    <div class="footer-area">
-        <!--including footer partial view here-->
+
+    
         <footer>
             <%- include("./partials/_footer.html") %>
         </footer>

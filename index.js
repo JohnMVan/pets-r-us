@@ -13,6 +13,7 @@ const mongoose = require('mongoose');
 
 const Customer = require('./models/customer');
 const Appointment = require('./models/appointment');
+const { allowedNodeEnvironmentFlags } = require('process');
 
 const app = express();
 app.engine('.html', require('ejs').__express);
@@ -91,24 +92,73 @@ app.get('/customer-list', (req, res) => {
 });
 
 app.get('/appointment', (req, res) => {
+    let jsonFile = fs.readfileSync('./public/data/services.json');
+    let services = JSON.parse(jsonFile);
     res.render('appointment', {
-        title: `Pets-R-Us: Appointments`
+        title: `Pets-R-Us: Appointments`,
+        services: services
     })
 });
 
-app.get('api/appointment', async(req, res) => {}
-    Customer.find('customerId': req.params.customerId), 
-    function(err, orders) {
+app.post('/appointment', (req, res) => {
+    const customerId = req.body.customerId;
+    const firstName = req.body.fName;
+    const lastName = req.body.lName;
+    const email = req.body.email;
+    const service = req.body.service;
+
+    let appointment = new Appointment({
+        customerId,
+        firstName,
+        lastName,
+        email,
+        service
+    });
+
+    Appointment.create(appointment, function(err, appointment) {
         if(err) {
             console.log(err);
             next(err);
         } else {
-            res.json(appointment);
+            console.log("Your appointment has been scheduled")
+            console.log(appointment);
+            res.redirect('/')
+        }
+});
+
+app.get('/appointments', (req, res) => {
+    res.render('appointments', {
+        title: `Pets-R-Us: My Appointments`
+    })
+});
+
+app.get('/api/appointments/:email', async(req, res, next) => {
+    Appointment.find({'email': req.params.email}, function(err, appointments) {
+        if(err) {
+            console.log(err);
+            next(err);
+        } else {
+            res.json.apply(appointments);
         }
     })
-
-//starting server on port 3000
-app.listen(PORT, () => {
-    console.log('Application started and listening on port ' + PORT);
 })
 
+app.get('/customers', (req, res) => {
+    Customer.find({}, function(err, Customer) {
+        if (err) {
+            console.log(err);
+            next(err);
+        } else {
+            res.render('customer-list', {
+                title: `Pets-R-Us: Customer List`,
+                customers: Customer
+            })
+        }     
+    })
+});
+
+
+    //starting server on port 3000
+    app.listen(PORT, () => {
+        console.log('Application started and listening on port ' + PORT);
+    }); 

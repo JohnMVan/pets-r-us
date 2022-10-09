@@ -9,18 +9,58 @@
 <!--header area, contains HTML-->
 <%- include('partials/_header.html') -%>
 
+<h3 class="title">Appointments</h3>>
 
 <div class="card">
     <div class="card-content">
         <div class="form">
-            <form action="/appointment">
+            <div class="form-field">
+                <label for="email"></label><br>
+                <input type="text" class="input" name="email" id="email">
+            </div>
 
-            </form>
-
-        </div>
-    
+            <div class="form-field">
+                <input type="text" value="Search" id="search" class="btn btn-primary full-width">
+            </div>
+        </div id="appointments">
     </div>
 </div>
+
+<script>
+
+    document.getElementById('search').onclick = function() {
+        const email = document.getElementById('email').value;
+
+        fetch('api/appointments' + email)
+            .then(res => res.json())
+            .then(data => {
+                let tableString = `<br />
+                    <h4 style="text-align: center">My Appointments</h4>
+                        <table id="appointments" class="table">
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Service</th>
+                            </tr>`;
+                
+                for (let appointment of data) {
+                    tablesString += `
+                            <tr>
+                                <td>${appointment.fName}</td>
+                                <td>${appointment.lName}</td>
+                                <td>${appointment.email}</td>
+                                <td>${appointment.service}</td>
+                            </tr>`;
+                }
+
+                tableString += `</table>`
+
+                document.getElementById('appointments').innerHTML = tableString;
+            });
+    }
+
+</script>
 
 <!--footer area, includes end of html-->
 <%- include('partials/_footer.html') -%>

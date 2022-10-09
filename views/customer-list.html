@@ -6,16 +6,10 @@ Description:  customer-list.html page for the pets-r-us app.
 -->
 
 
-<%- include('./partials/_header.html') %>
+<%- include('./partials/_header.html') -%>
 
-<section class="container">
-    <div class="card center-div">
-        <div class="card-title">
-            Customer List
-        </div>
-
-        <div class="card-content">
-            <% if(customer.length > 0) { %>
+<div class="card">
+    <div class="card-content">            
             <table class="table">
                 <tr>
                     <th>Customer ID</th>
@@ -29,21 +23,16 @@ Description:  customer-list.html page for the pets-r-us app.
                     </td>
                     <td>
                         <%= customer.email %> 
-                    </td>
-                    <td>
-                        <a href="#">DELETE</a>
-                    </td>
+                    </td>                  
                 </tr>
-                <% }) %>
-                </tbody>
+            </tbody>
+            <% }) %>
+              
             </table>
-            <% } else { %>
-            <h3>Customer has not been added to the MongoDV database.  Try adding one!</h3>
-            <% } %>           
+                      
         </div>
-    </div>
-</section>
+ 
+</div>
 
-
-<%- include('.partials/_footer.html') %>
+<%- include('.partials/_footer.html') -%>
 
